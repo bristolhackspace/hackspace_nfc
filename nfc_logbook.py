@@ -15,7 +15,13 @@ for sig in [signal.SIGTERM, signal.SIGINT, signal.SIGHUP, signal.SIGQUIT]:
 mifare = nxppy.Mifare()
 uid = None
 
-f = open("user_list.csv",'a')
+f = open("user_list.csv",'r')
+
+user_hash = {}
+
+for line in f:
+	user_hash[line.split(',')[0]] = line.split(',')[1].strip()
+
 # Select the first available tag and return the UID
 while True:
 	try:
@@ -24,10 +30,8 @@ while True:
 		pass
 	if uid is not None:
 		print "Card detected:", uid
-		username = raw_input("Please enter member name: ")
-		print username, "ID:", uid
-		dataline = uid + ',' + username + '\n'
-		f.write(dataline)
+		if uid in user_hash.keys():
+			print "hello ", user_hash[uid] 
 		uid = None #reset uid to None
 		time.sleep(2) #pause for 2 seconds
 
