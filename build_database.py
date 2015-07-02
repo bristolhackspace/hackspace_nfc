@@ -1,4 +1,5 @@
 import nxppy
+import time
 
 mifare = nxppy.Mifare()
 uid = None
@@ -6,16 +7,15 @@ uid = None
 while True:
 	try:
 		uid = mifare.select()
-		#mifare.write_block(10,b'abcd')
-		#blockbytes = mifare.read_block(10)
 	except nxppy.SelectError:
 		pass
 	if uid is not None:
-		break
-print uid
-for i in range(64):
-	blockbytes = mifare.read_block(i)
-	print i, blockbytes, len(blockbytes)
+		print "Card detected:", uid
+		username = raw_input("Please enter member name: ")
+		print username, "ID:", uid
+		uid = None #reset uid to None
+		time.sleep(2) #pause for 2 seconds
+
 
 #print blockbytes
 
