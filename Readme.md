@@ -7,7 +7,6 @@ Requirements:
 * python
 * nxppy python library (https://github.com/svvitale/nxppy)
 
-
 Currently contains 2 scripts:
 
 	1. build_database.py
