@@ -72,13 +72,21 @@ class pyscope :
         font = pygame.font.Font(None, 80)
         for i in range(30):
             #clear the screen
-            self.screen.fill((0, 0, 255))     
+            self.screen.fill((255, 255, 255))
+            # Render the hackspace logo at 400,160
+            logo = pygame.image.load('logo1.1_300_trans.png').convert()
+            self.screen.blit(logo, (400, 160))     
             # Render some text with a background color
+            datestr = time.strftime("%A, %d %b %Y", time.localtime())
+            text_surface = font.render(datestr,
+                True, (0, 0, 0))
+            # Blit the text
+            self.screen.blit(text_surface, (50, 30))            
             timestr = time.strftime("%H:%M:%S", time.localtime())
             text_surface = font.render(timestr,
-                True, (255, 255, 255))
+                True, (0, 0, 0))
             # Blit the text
-            self.screen.blit(text_surface, (100, 30))
+            self.screen.blit(text_surface, (60, 90))
             # Update the display
             pygame.display.update()
             try:
@@ -89,11 +97,11 @@ class pyscope :
                 #print "Card detected:", uid
                 if uid in user_hash.keys():
                     text_surface = font.render("Hello",
-                        True, (255, 255, 255))
-                    self.screen.blit(text_surface, (140, 180))                	
+                        True, (0, 0, 0))
+                    self.screen.blit(text_surface, (60, 210))                	
                     text_surface = font.render(user_hash[uid],
-                        True, (255, 255, 255))
-                    self.screen.blit(text_surface, (160, 240))
+                        True, (0, 0, 0))
+                    self.screen.blit(text_surface, (60, 270))
                 uid = None #reset uid to None
                 pygame.display.update()
                 time.sleep(1) #pause for 1 seconds
